@@ -10,7 +10,8 @@ import {
 const mergeSort = (array: SortArrayItem[]) => {
 	const commands: Command[] = [];
 	const original = array.map((item) => item.value);
-    const values = [...original]
+    const values = [...original];
+	const indices = rangeArray(0, values.length - 1);
 	let currCmd = init(values);
 
 	function merge(start: number, mid: number, end: number) {
@@ -21,28 +22,50 @@ const mergeSort = (array: SortArrayItem[]) => {
 		let k = 0;
 		while (i < left.length && j < right.length) {
 			if (left[i] <= right[j]) {
-				values[start + k++] = left[i++];
+				values[start + k] = left[i];
+				indices[start + k] = original.indexOf(values[start + k]);
+
+				i++;
 			} else {
-				values[start + k++] = right[j++];
+				values[start + k] = right[j];
+				indices[start + k] = original.indexOf(values[start + k]);
+
+				j++;
 			}
 
-            const newInd = values.map(v => original.indexOf(v));
-            currCmd = setIndices(currCmd, newInd);
+            //const newInd = values.map(v => original.indexOf(v));
+            // currCmd = setIndices(currCmd, newInd);
+            currCmd = setIndices(currCmd, [...indices]);
+			currCmd.swapping = [start + k];
             commands.push(currCmd);
+
+			k++;
 		}
 		while (i < left.length) {
-			values[start + k++] = left[i++];
+			values[start + k] = left[i];
+			indices[start + k] = original.indexOf(values[start + k]);
 
-            const newInd = values.map(v => original.indexOf(v));
-            currCmd = setIndices(currCmd, newInd);
+            // const newInd = values.map(v => original.indexOf(v));
+            // currCmd = setIndices(currCmd, newInd);
+            currCmd = setIndices(currCmd, [...indices]);
+			currCmd.swapping = [start + k];
             commands.push(currCmd);
+
+			i++;
+			k++;
 		}
 		while (j < right.length) {
-			values[start + k++] = right[j++];
+			values[start + k] = right[j];
+			indices[start + k] = original.indexOf(values[start + k]);
             
-            const newInd = values.map(v => original.indexOf(v));
-            currCmd = setIndices(currCmd, newInd);
+            // const newInd = values.map(v => original.indexOf(v));
+            // currCmd = setIndices(currCmd, newInd);
+            currCmd = setIndices(currCmd, [...indices]);
+			currCmd.swapping = [start + k];
             commands.push(currCmd);
+
+			k++;
+			j++;
 		}
 	}
 
