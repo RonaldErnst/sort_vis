@@ -63,7 +63,7 @@ const finishItem = (currCmd: Command, index: number): Command => {
     };
 };
 
-const rangeArray = (start: number, end: number) => {
+const rangeArray = (start: number, end: number): number[] => {
     return [...Array.from(Array(end - start + 1).keys())].map(x => x + start);
 }
 
