@@ -5,7 +5,6 @@ import {
 	init,
 	rangeArray,
 	setIndices,
-	swap,
 } from "../helpers";
 
 const insertionSort = (array: SortArrayItem[]) => {
