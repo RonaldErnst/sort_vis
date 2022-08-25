@@ -1,6 +1,7 @@
 import bubbleSort from "./bubbleSort";
 import insertionSort from "./insertionSort";
 import mergeSort from "./mergeSort";
+import selectionSort from "./selectionSort";
 
 const algorithms = [
   {
@@ -15,6 +16,10 @@ const algorithms = [
     title: "InsertionSort",
     alg: insertionSort,
   },
+  {
+    title: "SelectionSort",
+    alg: selectionSort
+  }
 ];
 
 export default algorithms;
