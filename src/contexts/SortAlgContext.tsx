@@ -9,7 +9,7 @@ import {
 	useEffect,
 	useMemo,
 } from "react";
-import { bubbleSort, mergeSort } from "../utils/sortingAlgorithms";
+import algorithms from "../utils/sortingAlgorithms";
 import { Command } from "../utils/helpers";
 import useStateCallback from "../utils/useStateCallback";
 
@@ -141,14 +141,14 @@ const AlgProvider: FC<PropsWithChildren> = ({ children }) => {
 	}
 
 	function sort(algName: string, sortArray: SortArrayItem[]): Command[] {
-		switch (algName) {
-			case "BubbleSort":
-				return bubbleSort(sortArray);
-			case "MergeSort":
-				return mergeSort(sortArray);
-			default:
-				return [];
-		}
+		let cmds: Command[] = [];
+
+		const algorithm = algorithms.find(a => a.title === algName);
+
+		if(algorithm !== undefined)
+			cmds = algorithm.alg(sortArray);
+
+		return cmds;
 	}
 
 	// When currCmdIndex has changed

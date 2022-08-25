@@ -1,8 +1,8 @@
-import React from "react";
+import algorithms from "../utils/sortingAlgorithms";
 import { useAlg } from "../contexts/SortAlgContext";
 
 export default function SortAlgSelector() {
-	const sortingAlgs: string[] = ["BubbleSort", "MergeSort"];
+	const sortingAlgs: string[] = algorithms.map(a => a.title);
 	const { algName, setAlgorithm, sortArray } = useAlg();
 
 	return (
