@@ -128,9 +128,9 @@ const AlgProvider: FC<PropsWithChildren> = ({ children }) => {
 		setTimeoutIDs([]);
 	}, [timeoutIDs]);
 
-	function setAlgorithm(newAlg: string, sortArray: SortArrayItem[]) {
+	function setAlgorithm(newAlg: string) {
 		setAlgName(newAlg);
-		calculateCommands(newAlg, sortArray);
+		calculateCommands(newAlg, origArray.current !== null? origArray.current : sortArray);
 	}
 
 	function calculateCommands(newAlg: string, sortArray: SortArrayItem[]) {
